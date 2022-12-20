@@ -2,20 +2,7 @@ const fs = require('fs');
 const http = require('http');
 const url = require('url');
 
-const template = (temp, product) => {
-    let output = temp.replace(/{%ID%}/g, product.id);
-    output = output.replace(/{%PRODUCT-NAME%}/g, product.productName);
-    output = output.replace(/{%IMAGE%}/g, product.image);
-    output = output.replace(/{%FROM%}/g, product.from);
-    output = output.replace(/{%NUTRIENTS%}/g, product.nutrients);
-    output = output.replace(/{%QUANTITY%}/g, product.quantity);
-    output = output.replace(/{%PRICE%}/g, product.price);
-    output = output.replace(/{%DESCRIPTION%}/g, product.description);
-
-    if (!product.organic)
-        output = output.replace(/{%NOT-ORGANIC%}/g, 'not-organic');
-    return output;
-};
+const template = require('./modules/template.js');
 
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
 const dataObj = JSON.parse(data);
